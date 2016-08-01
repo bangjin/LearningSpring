@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="hsqlService" class="com.wx.learning.core.service.impl.DefaultHSQLService" scope="singleton" init-method="start" destroy-method="shutdown">
+        <constructor-arg name="address" value="localhost"/>
+        <constructor-arg name="databaseName" value="learning"/>
+        <constructor-arg name="databasePath" value="/tmp/hsql"/>
+        <constructor-arg name="port" value="33306"/>
+    </bean>
+
+    <bean id="defaultUserDao" class="com.wx.learning.core.dao.impl.DefaultUserDao">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--<bean id="abstractUserDao" class="com.wx.learning.core.dao.impl.AbstractUserDao"/>-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/learning"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="root"/>-->
+        <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"/>
+        <property name="url" value="jdbc:hsqldb:hsql://localhost:33306/learning"/>
+        <property name="username" value="SA"/>
+        <property name="password" value=""/>
+    </bean>
+</beans>
