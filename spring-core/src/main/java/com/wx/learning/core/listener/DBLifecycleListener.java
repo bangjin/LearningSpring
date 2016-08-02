@@ -1,7 +1,9 @@
 package com.wx.learning.core.listener;
 
 import org.springframework.context.SmartLifecycle;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DBLifecycleListener implements SmartLifecycle {
     private boolean isRunning = false;
     public void start() {

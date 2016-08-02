@@ -5,17 +5,19 @@ import com.wx.learning.core.dao.impl.DefaultUserDao;
 import com.wx.learning.core.entity.User;
 import com.wx.learning.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
+@Service
 public class DefaultUserService implements UserService{
 
+    @Autowired
+    @Qualifier("defaultUserDao")
     private UserDao userDao;
 
-    public DefaultUserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
 
     public User getUserById(int uid) {
         try {
@@ -25,4 +27,5 @@ public class DefaultUserService implements UserService{
         }
         return null;
     }
+
 }
